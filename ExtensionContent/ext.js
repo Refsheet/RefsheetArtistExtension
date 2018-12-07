@@ -23,7 +23,21 @@ function onLoaded() {
     updateThemeWithAppSkinInfo(csInterface.hostEnvironment.appSkinInfo);
     // Update the color of the panel when the theme color of the product changed.
     csInterface.addEventListener(CSInterface.THEME_COLOR_CHANGED_EVENT, onAppThemeColorChanged);
-	
+    
+    if (appName == "PHXS") {
+        // Persist Extension Panel
+        var event = new CSEvent();
+        event.type = "com.adobe.PhotoshopPersistent";
+        event.scope = "APPLICATION";
+        event.extensionId = window.__adobe_cep__.getExtensionId();
+        new CSInterface().dispatchEvent(event);
+    }
+}
+
+function refreshIframe() {
+    var frame = document.getElementById('root');
+    if (frame)
+        frame.contentWindow.location.reload();
 }
 
 

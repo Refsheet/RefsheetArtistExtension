@@ -16,16 +16,21 @@
 		</LocaleList>
 		<RequiredRuntimeList>
 			<RequiredRuntime Name="CSXS" Version="5.0" />
-
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
 		<Extension Id="net.refsheet.artist.extension.extension1">
-			<DispatchInfo >
+            <HostList>
+                <Host Name="PHXS" Port="8088" />            
+            </HostList>
+			<DispatchInfo>
 				<Resources>
-				<MainPath>./index.html</MainPath>
-				<ScriptPath>./RefsheetArtistExtension.jsx</ScriptPath>
+                    <MainPath>./index.html</MainPath>
+                    <ScriptPath>./RefsheetArtistExtension.jsx</ScriptPath>
 				</Resources>
+                <CEFCommandLine>
+                    <Parameter>--disable-application-cache</Parameter>
+                </CEFCommandLine>
 				<Lifecycle>
 					<AutoVisible>true</AutoVisible>
 				</Lifecycle>
@@ -42,7 +47,7 @@
 							<Width>200</Width>
 						</MinSize>
                         <MaxSize>
-                            <Height>9999</Height>
+                            <Height>99999</Height>
                             <Width>1200</Width>                        
                         </MaxSize>
 					</Geometry>

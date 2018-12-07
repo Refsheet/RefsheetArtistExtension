@@ -20,3 +20,33 @@ $._ext = {
         }
     }
 };
+
+function f(func) {
+    try {
+        return func()
+    } catch(e) {
+        return "ERROR: " + e;
+    }
+}
+
+function getDocName() {
+    return f(function() {
+        return app.documents.length ? app.activeDocument.name : "No docs open!";
+    })
+}
+
+function setForegroundColor(color_hex) {
+    return f(function() {
+        var color = new SolidColor();
+        color.rgb.hexValue = color_hex;
+        app.foregroundColor = color;
+    })
+}
+
+function setBackgroundColor(color_hex) {
+    return f(function() {
+        var color = new SolidColor();
+        color.rgb.hexValue = color_hex;
+        app.backgroundColor = color;
+    })
+}
