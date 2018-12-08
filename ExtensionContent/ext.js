@@ -1,3 +1,5 @@
+var DEV_URL = "http://192.168.17.128:3000"
+var PROD_URL = "http://extension.refsheet.net"
 
 function onLoaded() {
     var csInterface = new CSInterface();
@@ -38,6 +40,18 @@ function refreshIframe() {
     var frame = document.getElementById('root');
     if (frame)
         frame.contentWindow.location.reload();
+}
+
+function switchToDev() {
+    var frame = document.getElementById('root');
+    if (frame)
+        frame.contentWindow.location = DEV_URL;
+}
+
+function switchToProd() {
+    var frame = document.getElementById('root');
+    if (frame)
+        frame.contentWindow.location = PROD_URL;
 }
 
 
