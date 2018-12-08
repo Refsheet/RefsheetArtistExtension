@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ExtensionManifest Version="6.0" ExtensionBundleId="net.refsheet.artist.extension" ExtensionBundleVersion="1.0.0"
+<ExtensionManifest Version="6.0" ExtensionBundleId="net.refsheet.artist.extension" ExtensionBundleVersion="1.0.1"
 		ExtensionBundleName="RefsheetArtistExtension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="net.refsheet.artist.extension.extension1" Version="1.0" />
+		<Extension Id="net.refsheet.artist.extension.extension1" Version="1.0.1" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
@@ -20,9 +20,6 @@
 	</ExecutionEnvironment>
 	<DispatchInfoList>
 		<Extension Id="net.refsheet.artist.extension.extension1">
-            <HostList>
-                <Host Name="PHXS" Port="8088" />            
-            </HostList>
 			<DispatchInfo>
 				<Resources>
                     <MainPath>./index.html</MainPath>
