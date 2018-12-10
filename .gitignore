@@ -1,2 +1,5 @@
-
 *.zxp
+*.bak
+
+.idea/*
+.idea

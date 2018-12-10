@@ -1,10 +1,9 @@
-var DEV_URL = "http://192.168.17.128:3000"
-var PROD_URL = "http://extension.refsheet.net"
+var VERSION = "1.0.0";
+var DEV_URL = "http://192.168.17.128:3000";
+var PROD_URL = "http://extension.refsheet.net";
 
 function onLoaded() {
     var csInterface = new CSInterface();
-	
-    
     var appName = csInterface.hostEnvironment.appName;
     
     if(appName != "FLPR"){
