@@ -6,26 +6,28 @@ const pkg = require('../package.json');
 const PACKAGE_NAME = "RefsheetArtistApp";
 const VERSION = pkg.version;
 
-async function buildWin32() {
-    const ZXP_SIGN_CMD = path.join("bin", "win", "ZXPSignCmd.exe");
-
+async function sign(cmd) {
     const inputDirectory = "src";
     const outputZxp = path.join("build", `${PACKAGE_NAME}-${VERSION}.zxp`);
     const p12 = path.join("bin/adobe.p12");
     const p12Password = "fishsticks";
     const tsa = "http://timestamp.comodoca.com/";
 
-    await run("echo", ["hi"]);
-    await run(ZXP_SIGN_CMD, ["-sign", inputDirectory, outputZxp, p12, p12Password, '-tsa', tsa]);
+    await run(cmd, ["-sign", inputDirectory, outputZxp, p12, p12Password, '-tsa', tsa]);
 }
 
 async function main() {
     if (process.platform === "win32") {
-        await buildWin32()
+        await sign(path.join("bin", "win", "ZXPSignCmd.exe"));
     } else {
         console.error("Can't build for: " + process.platform);
         process.exit(1);
     }
 }
+
+module.exports = {
+    default: main,
+    sign
+};
 
 start(main);

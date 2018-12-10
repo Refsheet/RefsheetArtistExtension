@@ -67,4 +67,11 @@ function hardcodeVersion(version, bak=true) {
     fs.writeFileSync(file, data);
 }
 
+module.exports = {
+    default: main,
+    updatePackage,
+    updateManifest,
+    hardcodeVersion
+};
+
 start(main);
