@@ -1,0 +1,25 @@
+{
+  "name": "refsheet-adobe-extension",
+  "version": "1.0.0",
+  "description": "Refsheet.net Adobe Artist Extension",
+  "main": "src/ext.js",
+  "directories": {
+    "src/lib": "src/lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "node bin/version",
+    "build": "node bin/build",
+    "install": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Refsheet/RefsheetArtistExtension.git"
+  },
+  "author": "William Eisert <weisert@eisertdev.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Refsheet/RefsheetArtistExtension/issues"
+  },
+  "homepage": "https://github.com/Refsheet/RefsheetArtistExtension#readme"
+}

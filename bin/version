@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+const { start } = require('./lib/common.js');
+const pkg = require('../package.json');
+const fs = require('fs');
+
+async function main(argv) {
+    const packageVersion = pkg.version;
+    let version = packageVersion;
+    let bumpMinor = true;
+
+    if (argv[0] === "get") {
+        console.log(packageVersion);
+        process.exit(0);
+    }
+
+    if (argv.length > 0 && argv[0].match(/^\d+(\.\d+){1,2}/)) {
+        version = argv.shift();
+        bumpMinor = false;
+    }
+
+    version = version.split('.').map(i => parseInt(i));
+
+    // Bump Minor
+    if (bumpMinor) {
+        if(!version[2]) version[2] = 0;
+        version[2] += 1;
+    }
+
+    const versionStr = version.join('.');
+
+    if (argv[0] === "set") {
+        pkg.version = versionStr;
+        const pkgJson = JSON.stringify(pkg, null, 2);
+        fs.copyFile("package.json", "package.json.bak");
+        fs.writeFileSync("package.json", pkgJson);
+        console.log(pkgJson);
+    }
+
+    console.log(versionStr);
+}
+
+start(main);
