@@ -9,9 +9,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "version": "node bin/version set",
+    "release": "node bin/release",
+    "install": "node bin/install",
     "build": "node bin/build",
-    "release": "npm run version && npm run build && node bin/release",
-    "install": "node bin/install"
+    "build:release": "npm run version && npm run build && npm run release",
+    "build:install": "npm run build && npm run install"
   },
   "repository": {
     "type": "git",
