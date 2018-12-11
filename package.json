@@ -1,6 +1,6 @@
 {
   "name": "refsheet-adobe-extension",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Refsheet.net Adobe Artist Extension",
   "main": "src/ext.js",
   "directories": {
@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "version": "node bin/version set",
     "build": "node bin/build",
-    "install": ""
+    "release": "npm run version && npm run build",
+    "install": "node bin/install"
   },
   "repository": {
     "type": "git",

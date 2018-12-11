@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+const { start, run } = require('./lib/common.js');
+const path = require('path');
+const pkg = require('../package.json');
+const fs = require('fs');
+
+const PACKAGE_NAME = "RefsheetArtistApp";
+const PACKAGE_DOMAIN = "net.refsheet.artist.extension";
+const VERSION = pkg.version;
+
+const EXMAN_URL = "https://partners.adobe.com/exchangeprogram/creativecloud/support/exman-com-line-tool.html";
+
+async function main(argv) {
+    const zxpFile = path.join('build', `${PACKAGE_NAME}-${VERSION}.zxp`);
+    let exManCmd;
+    let exManRemove = [];
+    let exManArgs = [];
+
+    if (!fs.existsSync(zxpFile)) {
+        console.error(`File ${zxpFile} does not exist! Did you \`build'?`);
+        process.exit(2);
+    }
+
+    if (process.platform === "win32") {
+        exManCmd = path.join("bin/win/ExManCmd/ExManCmd.exe");
+        exManRemove.push('/remove');
+        exManArgs.push('/install');
+    } else {
+        console.error("Can't install for: " + process.platform);
+        process.exit(1);
+    }
+
+    if (!fs.existsSync(exManCmd)) {
+        console.error(`File ${exManCmd} does not exist!\nYou can download it from:  ${EXMAN_URL}\nExtract it to:             ${path.dirname(exManCmd)}`);
+        process.exit(2);
+    }
+
+    exManRemove.push(PACKAGE_DOMAIN);
+    exManArgs.push(zxpFile);
+
+    await run(exManCmd, exManRemove);
+    await run(exManCmd, exManArgs);
+}
+
+module.exports = {
+    default: main
+};
+
+start(main);

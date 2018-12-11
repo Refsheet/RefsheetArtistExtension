@@ -2,6 +2,7 @@
 const { run, start } = require('./lib/common.js');
 const path = require('path');
 const pkg = require('../package.json');
+const fs = require('fs');
 
 const PACKAGE_NAME = "RefsheetArtistApp";
 const VERSION = pkg.version;
@@ -12,6 +13,10 @@ async function sign(cmd) {
     const p12 = path.join("bin/adobe.p12");
     const p12Password = "fishsticks";
     const tsa = "http://timestamp.comodoca.com/";
+
+    if (fs.existsSync(outputZxp)) {
+        fs.unlinkSync(outputZxp);
+    }
 
     await run(cmd, ["-sign", inputDirectory, outputZxp, p12, p12Password, '-tsa', tsa]);
 }

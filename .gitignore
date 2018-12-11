@@ -3,3 +3,6 @@
 
 .idea/*
 .idea
+
+/bin/win/ExManCmd
+/bin/osx/ExManCmd
