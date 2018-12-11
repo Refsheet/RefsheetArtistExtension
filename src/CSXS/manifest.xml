@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ExtensionManifest Version="6.0" ExtensionBundleId="net.refsheet.artist.extension" ExtensionBundleVersion="1.0.10"
+<ExtensionManifest Version="6.0" ExtensionBundleId="net.refsheet.artist.extension" ExtensionBundleVersion="1.0.100"
 		ExtensionBundleName="RefsheetArtistExtension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="net.refsheet.artist.extension.extension1" Version="1.0.10" />
+		<Extension Id="net.refsheet.artist.extension.extension1" Version="1.0.100" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
