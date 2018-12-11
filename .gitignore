@@ -6,3 +6,5 @@
 
 /bin/win/ExManCmd
 /bin/osx/ExManCmd
+
+node_modules/

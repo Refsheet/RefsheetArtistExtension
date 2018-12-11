@@ -50,3 +50,38 @@ function setBackgroundColor(color_hex) {
         app.backgroundColor = color;
     })
 }
+
+function openFile(file) {
+    return f(function() {
+        var fh = new File(file);
+        app.open(fh);
+    })
+}
+
+function placeFile(file, layerName) {
+    return f(function() {
+        var fh = new File(file);
+        if (app.activeDocument) {
+            var sourceDoc = app.activeDocument;
+            var newDoc = open(fh);
+            if (!layerName) layerName = newDoc.name;
+
+            try {
+                // Convert to layer
+                newDoc.artLayers.add();
+                newDoc.mergeVisibleLayers();
+                var layer = newDoc.activeLayer;
+                layer.name = layerName;
+
+                // Place Image
+                layer.duplicate(sourceDoc, ElementPlacement.PLACEATBEGINNING);
+            } catch(e) {
+                throw(e);
+            } finally {
+                newDoc.close(SaveOptions.DONOTSAVECHANGES);
+            }
+        } else {
+            app.open(fh);
+        }
+    })
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ExtensionManifest Version="6.0" ExtensionBundleId="net.refsheet.artist.extension" ExtensionBundleVersion="1.0.103"
+<ExtensionManifest Version="7.0" ExtensionBundleId="net.refsheet.artist.extension" ExtensionBundleVersion="1.0.103"
 		ExtensionBundleName="RefsheetArtistExtension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
 		<Extension Id="net.refsheet.artist.extension.extension1" Version="1.0.103" />
@@ -15,7 +15,7 @@
 			<Locale Code="All" />
 		</LocaleList>
 		<RequiredRuntimeList>
-			<RequiredRuntime Name="CSXS" Version="5.0" />
+			<RequiredRuntime Name="CSXS" Version="7.0" />
 		</RequiredRuntimeList>
 	</ExecutionEnvironment>
 	<DispatchInfoList>
@@ -24,10 +24,12 @@
 				<Resources>
                     <MainPath>./index.html</MainPath>
                     <ScriptPath>./RefsheetArtistExtension.jsx</ScriptPath>
+					<CEFCommandLine>
+						<Parameter>--disable-application-cache</Parameter>
+						<Parameter>--enable-nodejs</Parameter>
+						<Parameter>--mixed-content</Parameter>
+					</CEFCommandLine>
 				</Resources>
-                <CEFCommandLine>
-                    <Parameter>--disable-application-cache</Parameter>
-                </CEFCommandLine>
 				<Lifecycle>
 					<AutoVisible>true</AutoVisible>
 				</Lifecycle>

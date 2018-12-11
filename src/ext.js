@@ -1,6 +1,7 @@
 var VERSION = "1.0.103";
 var DEV_URL = "http://192.168.17.128:3000";
 var PROD_URL = "http://extension.refsheet.net";
+var PACKAGE_NAME = "RefsheetArtistExtension";
 
 function onLoaded() {
     var csInterface = new CSInterface();
@@ -125,7 +126,6 @@ function updateThemeWithAppSkinInfo(appSkinInfo) {
 	    addRule(styleId, "button", "border-color: " + toHex(panelBgColor, -50));
 	}
 }
-
 function addRule(stylesheetId, selector, rule) {
     var stylesheet = document.getElementById(stylesheetId);
     
@@ -138,8 +138,6 @@ function addRule(stylesheetId, selector, rule) {
            }
     }
 }
-
-
 function reverseColor(color, delta) {
     return toHex({red:Math.abs(255-color.red), green:Math.abs(255-color.green), blue:Math.abs(255-color.blue)}, delta);
 }
@@ -168,7 +166,6 @@ function toHex(color, delta) {
     }
     return "#" + hex;
 }
-
 function onAppThemeColorChanged(event) {
     // Should get a latest HostEnvironment object from application.
     var skinInfo = JSON.parse(window.__adobe_cep__.getHostEnvironment()).appSkinInfo;
@@ -202,4 +199,47 @@ function onClickButton(ppid) {
     	var extScript = "$._ext_" + ppid + ".run()";
 		evalScript(extScript);
 	}
+}
+
+
+// Our libs:
+
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+const mkdirp = require('mkdirp');
+
+function downloadFile(url, dest, resolve, reject) {
+    let request = http;
+
+    if (!dest) {
+        dest = path.join((new CSInterface).getSystemPath(SystemPath.USER_DATA), PACKAGE_NAME, "Temp")
+    }
+
+    try {
+        mkdirp.sync(dest);
+        dest = path.join(dest, path.basename(url));
+        dest = dest.replace(/[?#].*$/g, '');
+
+        console.log("Downloading to: " + dest);
+        const file = fs.createWriteStream(dest);
+
+        if (url.match(/^https/)) {
+            request = https
+        }
+
+        request.get(url, function(response) {
+            response.pipe(file);
+            file.on('finish', function() {
+                file.close();
+                resolve(dest);
+            });
+        }).on('error', function(err) { // Handle errors
+            fs.unlink(dest); // Delete the file async. (But we don't check the result)
+            if (reject) reject(err);
+        });
+    } catch(e) {
+        if (reject) reject(e);
+    }
 }
