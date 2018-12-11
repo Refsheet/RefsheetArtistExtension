@@ -11,7 +11,8 @@
     "version": "node bin/version set",
     "release": "node bin/release",
     "install": "node bin/install",
-    "build": "node bin/build",
+    "bundle": "cd src && npm install --production --no-bin-links --no-optional",
+    "build": "npm run bundle && node bin/build",
     "build:release": "npm run version && npm run build && npm run release",
     "build:install": "npm run build && npm run install"
   },
