@@ -1,4 +1,4 @@
-var VERSION = "1.0.100";
+var VERSION = "1.0.101";
 var DEV_URL = "http://192.168.17.128:3000";
 var PROD_URL = "http://extension.refsheet.net";
 
