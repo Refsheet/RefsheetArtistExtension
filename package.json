@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "version": "node bin/version set",
     "build": "node bin/build",
-    "release": "npm run version && npm run build",
+    "release": "npm run version && npm run build && node bin/release",
     "install": "node bin/install"
   },
   "repository": {

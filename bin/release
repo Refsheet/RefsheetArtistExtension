@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+const { start, run } = require('./lib/common.js');
+const path = require('path');
+const pkg = require('../package.json');
+const fs = require('fs');
+
+const PACKAGE_NAME = "RefsheetArtistApp";
+const VERSION = pkg.version;
+
+async function main(argv) {
+    const zxpFile = path.join('build', `${PACKAGE_NAME}-${VERSION}.zxp`);
+    const versionStr = `v${VERSION}`;
+
+    if (!fs.existsSync(zxpFile)) {
+        console.error(`File ${zxpFile} does not exist! Did you \`build'?`);
+        process.exit(2);
+    }
+
+    const result = await run('hub', ['add', '.']);
+
+    if (result.status !== 0) {
+        console.warn("Failed to run hub. Did you install it?\nWindows:  choco install -y hub\nOSX:      brew install hub");
+    }
+
+    await run('hub', ['commit', '-m', `Version bump to ${versionStr}.`]);
+
+    await run('hub', [
+        'release', 'create',
+        '-a', zxpFile,
+        '-m', versionStr,
+        versionStr
+    ]);
+}
+
+module.exports = {
+    default: main
+};
+
+start(main);
