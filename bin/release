@@ -23,6 +23,7 @@ async function main(argv) {
     }
 
     await run('hub', ['commit', '-m', `Version bump to ${versionStr}.`]);
+    await run('hub', ['push']);
 
     await run('hub', [
         'release', 'create',

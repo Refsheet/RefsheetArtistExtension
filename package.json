@@ -1,6 +1,6 @@
 {
   "name": "refsheet-adobe-extension",
-  "version": "1.0.104",
+  "version": "1.0.105",
   "description": "Refsheet.net Adobe Artist Extension",
   "main": "src/ext.js",
   "directories": {
